@@ -4,9 +4,9 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.json('hi there');
-});
+app.use(express.json());
+
+app.use('/api/auth', require('./routes/auth'));
 
 async function connect() {
   try {
@@ -15,6 +15,7 @@ async function connect() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
+      useCreateIndex: true,
     });
   } catch (error) {
     console.log('Mongoose Error', error);
