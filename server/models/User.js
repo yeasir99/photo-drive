@@ -23,6 +23,7 @@ const UserSchema = new mongoose.Schema({
   },
   avatar: {
     type: String,
+    default: 'https://www.gravatar.com/avatar/HASH',
   },
   createdAt: {
     type: Date,
