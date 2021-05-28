@@ -15,3 +15,5 @@ const createToken = user => {
     { algorithm: 'HS256', expiresIn: '1h' }
   );
 };
+
+module.exports = { verifyPassword, createToken };

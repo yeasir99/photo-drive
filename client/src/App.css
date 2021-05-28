@@ -1,5 +1,6 @@
 @layer components {
-  body {
+  .unAuthorizedApp {
+    @apply flex flex-col items-center h-screen;
     background-image: linear-gradient(
         112.5deg,
         rgb(214, 214, 214) 0%,
@@ -58,9 +59,9 @@
     @apply bg-blue-200;
   }
   .authInput {
-    @apply w-full my-2 border px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500;
+    @apply w-full my-2 px-3 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500;
   }
   .TabsButton {
-    @apply w-full flex justify-center items-center bg-blue-300 hover:bg-blue-400 text-xl py-2 my-2 rounded-lg;
+    @apply w-full flex justify-center items-center bg-blue-300 hover:bg-blue-400 text-xl py-2 my-2 rounded-lg outline-none focus:outline-none;
   }
 }

@@ -2,8 +2,13 @@ import {useFormik} from 'formik'
 import * as Yup from 'yup'
 import TabsButton from './TabButton'
 import {FaSignInAlt} from 'react-icons/fa'
+import useAuth from './../utils/useAuth'
+import {loginUser} from '../context/auth/authAction'
+import Spinner from './Spinner'
 
 const Login = () => {
+  const [{loading}, authDispatch] = useAuth()
+
   const formik = useFormik({
     initialValues: {
       userEmail: '',
@@ -18,7 +23,7 @@ const Login = () => {
         .min(8, 'Password must be at least 8 character'),
     }),
     onSubmit: values => {
-      console.log(values)
+      loginUser(authDispatch, {data: values}, formik.resetForm)
     },
   })
   return (
@@ -28,8 +33,8 @@ const Login = () => {
         <input
           className={`authInput ${
             formik.touched.userEmail && formik.errors.userEmail
-              ? 'border-red-600'
-              : 'border-gray-300'
+              ? 'border-2 border-red-600'
+              : 'border border-gray-300'
           }`}
           type="email"
           id="userEmail"
@@ -38,17 +43,12 @@ const Login = () => {
           onBlur={formik.handleBlur}
           placeholder="Email"
         />
-
-        {formik.touched.userEmail && formik.errors.userEmail ? (
-          <div className="text-red-600 mb-2">{formik.errors.userEmail}</div>
-        ) : null}
-
         <label htmlFor="userPassword">Password</label>
         <input
           className={`authInput ${
             formik.touched.userPassword && formik.errors.userPassword
-              ? 'border-red-600'
-              : 'border-gray-300'
+              ? 'border-2 border-red-600'
+              : 'border border-gray-300'
           }`}
           type="password"
           id="userPassword"
@@ -57,13 +57,9 @@ const Login = () => {
           onBlur={formik.handleBlur}
           placeholder="Password"
         />
-
-        {formik.touched.userPassword && formik.errors.userPassword ? (
-          <div className="text-red-600 mb-2">{formik.errors.userPassword}</div>
-        ) : null}
-
         <TabsButton>
           <FaSignInAlt /> <p className="ml-1">Sign in</p>
+          {loading ? <Spinner className="text-xl ml-2" /> : ''}
         </TabsButton>
       </form>
     </div>

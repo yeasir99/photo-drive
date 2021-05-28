@@ -1,7 +1,12 @@
-import React from 'react';
+import useAuth from './utils/useAuth'
+import Authorizedapp from './screens/Authorizedapp'
+import Unauthorizedapp from './screens/Unauthorizedapp'
 
 const App = () => {
-  return <div>App</div>;
-};
+  const [{isAuthenticated}] = useAuth()
 
-export default App;
+  //let isAuthenticated = false
+  return isAuthenticated ? <Authorizedapp /> : <Unauthorizedapp />
+}
+
+export default App

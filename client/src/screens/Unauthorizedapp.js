@@ -6,7 +6,7 @@ import SignUp from './../components/SignUp'
 
 const Unauthorizedapp = () => {
   return (
-    <div className="flex flex-col items-center h-screen ">
+    <div className="unAuthorizedApp">
       <About />
       <div className="max-w-xs ">
         <Tabs className="bg-blue-200 rounded-lg">

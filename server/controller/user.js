@@ -13,10 +13,13 @@ exports.register = async (req, res) => {
     }
 
     user = await User.create({ name, email, password });
+
     const token = createToken(user);
+
     res.cookie('token', token, {
       httpOnly: true,
     });
+
     res.json({
       msg: 'User created successfully',
       user,
