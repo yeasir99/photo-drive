@@ -12,9 +12,10 @@ const authReducer = (state, action) => {
     case authActionTypes.REGISTER_REQUEST_SUCCESS:
     case authActionTypes.LOGIN_REQUEST_SUCCESS:
     case authActionTypes.REQUEST_USER_SUCCESS:
+      localStorage.setItem('user', JSON.stringify(action.payload.user))
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
         isAuthenticated: true,
         loading: false,
         error: null,

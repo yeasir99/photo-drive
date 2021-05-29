@@ -28,9 +28,18 @@ export function loginUser(dispatch, config, cb) {
   )
 }
 
-export function getUser(dispatch) {
+export function getUser(dispatch, cb) {
   dispatch({type: authActionTypes.REQUEST_USER})
-  // handle some async task
+  client('/api/auth').then(
+    data => {
+      dispatch({type: authActionTypes.REQUEST_USER_SUCCESS, payload: data})
+      cb(false)
+    },
+    error => {
+      dispatch({type: authActionTypes.REQUEST_USER_FAIL, payload: error})
+      cb(false)
+    },
+  )
 }
 
 export function clearError(dispatch) {

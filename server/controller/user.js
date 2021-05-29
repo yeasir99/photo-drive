@@ -14,6 +14,12 @@ exports.register = async (req, res) => {
 
     user = await User.create({ name, email, password });
 
+    const newUser = {
+      name: user.name,
+      email: user.email,
+      avatar: user.avatar,
+    };
+
     const token = createToken(user);
 
     res.cookie('token', token, {
@@ -22,7 +28,7 @@ exports.register = async (req, res) => {
 
     res.json({
       msg: 'User created successfully',
-      user,
+      user: newUser,
     });
   } catch (error) {
     res.json(error);

@@ -7,7 +7,9 @@ module.exports = function (req, res, next) {
   }
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log(decoded);
-  } catch (error) {}
-  next();
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return res.status(400).json({ msg: 'server error' });
+  }
 };
