@@ -7,7 +7,8 @@ import Spinner from './components/Spinner'
 
 const App = () => {
   const [{isAuthenticated}, authDispatch] = useAuth()
-  const [loading, setLoading] = useState('false')
+  const [loading, setLoading] = useState(false)
+
   useEffect(() => {
     const user = localStorage.getItem('user')
     if (user) {
