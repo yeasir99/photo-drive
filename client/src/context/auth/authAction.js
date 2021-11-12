@@ -42,6 +42,18 @@ export function getUser(dispatch, cb) {
   )
 }
 
+export function logout(dispatch) {
+  dispatch({type: authActionTypes.LOGOUT_REQUEST})
+  client('/api/auth/logout').then(
+    resolve => {
+      dispatch({type: authActionTypes.LOGOUT_REQUEST_SUCCESS})
+    },
+    reject => {
+      dispatch({type: authActionTypes.LOGOUT_REQUEST_FAIL, payload: reject})
+    },
+  )
+}
+
 export function clearError(dispatch) {
   dispatch({type: authActionTypes.CLEAR_ERROR})
 }

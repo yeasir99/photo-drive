@@ -8,10 +8,12 @@ const Authorizedapp = () => {
   return (
     <>
       <Header />
-      <Switch>
-        <Route path="/upload" component={Upload} />
-        <Route path="/" component={Home} />
-      </Switch>
+      <div className="max-w-screen-xl mx-auto px-2 lg:px-0">
+        <Switch>
+          <Route path="/upload" component={Upload} />
+          <Route path="/" component={Home} />
+        </Switch>
+      </div>
     </>
   )
 }

@@ -5,6 +5,7 @@ const authReducer = (state, action) => {
     case authActionTypes.LOGIN_REQUEST:
     case authActionTypes.REGISTER_REQUEST:
     case authActionTypes.REQUEST_USER:
+    case authActionTypes.LOGOUT_REQUEST:
       return {
         ...state,
         loading: true,
@@ -20,9 +21,18 @@ const authReducer = (state, action) => {
         loading: false,
         error: null,
       }
+    case authActionTypes.LOGOUT_REQUEST_SUCCESS:
+      return {
+        ...state,
+        user: {},
+        isAuthenticated: false,
+        error: null,
+        loading: false,
+      }
     case authActionTypes.LOGIN_REQUEST_FAIL:
     case authActionTypes.REGISTER_REQUEST_FAIL:
     case authActionTypes.REQUEST_USER_FAIL:
+    case authActionTypes.LOGOUT_REQUEST_FAIL:
       return {
         ...state,
         user: {},
