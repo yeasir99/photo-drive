@@ -12,8 +12,6 @@ export function registerUser(dispatch, config, cb) {
     error =>
       dispatch({type: authActionTypes.REGISTER_REQUEST_FAIL, payload: error}),
   )
-
-  // handle some async task
 }
 
 export function loginUser(dispatch, config, cb) {
@@ -44,7 +42,7 @@ export function getUser(dispatch, cb) {
 
 export function logout(dispatch) {
   dispatch({type: authActionTypes.LOGOUT_REQUEST})
-  client('/api/auth/logout').then(
+  client('/api/auth/logout', {method: 'POST'}).then(
     resolve => {
       dispatch({type: authActionTypes.LOGOUT_REQUEST_SUCCESS})
     },

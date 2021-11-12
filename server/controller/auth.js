@@ -2,7 +2,6 @@ const User = require('../models/User');
 const { verifyPassword, createToken } = require('../utils');
 
 exports.getUser = async (req, res) => {
-  console.log(req.user);
   try {
     const user = await User.findById(req.user.sub).select('-password');
     if (!user) {
@@ -53,5 +52,26 @@ exports.loginUser = async (req, res) => {
     });
   } catch (error) {
     res.status(400).json(error);
+  }
+};
+
+exports.logoutUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.sub).select('-password');
+    if (!user) {
+      return res.status(400).json({
+        msg: 'Unauthorized request',
+      });
+    }
+    res.cookie('token', '', {
+      httpOnly: true,
+    });
+    return res.status(200).json({
+      msg: 'User Logout successfully',
+    });
+  } catch (error) {
+    return res.status(400).json({
+      error,
+    });
   }
 };
