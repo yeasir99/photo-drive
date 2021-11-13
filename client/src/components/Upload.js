@@ -1,6 +1,8 @@
 import {useState} from 'react'
 import ImageUploading from 'react-images-uploading'
 import {FcAddImage, FcRemoveImage} from 'react-icons/fc'
+import {ImCross} from 'react-icons/im'
+import {IoCloudUpload} from 'react-icons/io5'
 
 function Upload() {
   const [images, setImages] = useState([])
@@ -11,6 +13,8 @@ function Upload() {
     console.log(imageList, addUpdateIndex)
     setImages(imageList)
   }
+
+  const handleUpload = () => {}
 
   return (
     <div className="my-5">
@@ -31,7 +35,7 @@ function Upload() {
         }) => (
           <div>
             <div
-              className="max-w-xl mx-auto bg-green-100 h-48 min-h-full border-2 border-green-200 rounded-md flex justify-items-center flex-col-reverse"
+              className="max-w-full mx-auto bg-green-100 h-48 min-h-full border-2 border-green-200 rounded-md flex justify-items-center flex-col-reverse"
               {...dragProps}
             >
               <div className="mx-auto py-2">
@@ -55,17 +59,34 @@ function Upload() {
               </div>
             ) : null}
 
-            {imageList.map((image, index) => (
-              <div key={index} className="image-item">
-                <div className="image-item__btn-wrapper">
-                  <img src={image.data_url} alt="" width="100" />
-                  <button onClick={() => onImageRemove(index)}>Remove</button>
+            <div className="grid grid-cols-2 gap-3 ">
+              {imageList.map((image, index) => (
+                <div key={index} className="relative">
+                  <img
+                    src={image.data_url}
+                    alt=""
+                    className="min-w-full h-auto border rounded-md"
+                  />
+                  <button
+                    onClick={() => onImageRemove(index)}
+                    className=" border-2 border-red-700 p-2 rounded-full absolute right-0.5 top-0.5 z-10"
+                  >
+                    <ImCross className="text-red-500" />
+                  </button>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         )}
       </ImageUploading>
+      {images.length ? (
+        <button
+          className=" bg-blue-200 flex justify-items-center items-center mt-3 p-2 border-2 border-green-200 rounded-md mx-auto"
+          onClick={handleUpload}
+        >
+          <IoCloudUpload /> Upload
+        </button>
+      ) : null}
     </div>
   )
 }
