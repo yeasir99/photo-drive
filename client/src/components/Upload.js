@@ -35,10 +35,14 @@ function Upload() {
         }) => (
           <div>
             <div
-              className="max-w-full mx-auto bg-green-100 h-48 min-h-full border-2 border-green-200 rounded-md flex justify-items-center flex-col-reverse"
+              className={`"max-w-full mx-auto  h-48 min-h-full border-2 ${
+                isDragging
+                  ? 'bg-green-200 border-green-400'
+                  : 'bg-green-100 border-green-200'
+              } rounded-md flex justify-items-center"`}
               {...dragProps}
             >
-              <div className="mx-auto py-2">
+              <div className="mx-auto py-2 self-end">
                 <button
                   onClick={onImageUpload}
                   className="bg-blue-200 flex justify-items-center items-center p-2 border-2 border-green-200 rounded-md "
@@ -48,10 +52,14 @@ function Upload() {
               </div>
             </div>
             {images.length ? (
-              <div className="flex justify-end my-2">
+              <div className="flex my-1">
+                <h2 className="text-lg font-semibold">
+                  Total:{' '}
+                  <span className="text-blue-500">{imageList.length} </span>
+                </h2>
                 <button
                   onClick={onImageRemoveAll}
-                  className="bg-blue-200 flex justify-items-center items-center p-2 border-2 border-red-300 rounded-md"
+                  className="bg-blue-200 flex justify-items-center items-center p-2 border-2 border-red-300 rounded-md ml-auto"
                 >
                   <FcRemoveImage className="mr-1 text-xl" />
                   Remove all
@@ -84,7 +92,7 @@ function Upload() {
           className=" bg-blue-200 flex justify-items-center items-center mt-3 p-2 border-2 border-green-200 rounded-md mx-auto"
           onClick={handleUpload}
         >
-          <IoCloudUpload /> Upload
+          <IoCloudUpload className="mr-1" /> Upload
         </button>
       ) : null}
     </div>
