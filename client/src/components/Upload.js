@@ -3,18 +3,48 @@ import ImageUploading from 'react-images-uploading'
 import {FcAddImage, FcRemoveImage} from 'react-icons/fc'
 import {ImCross} from 'react-icons/im'
 import {IoCloudUpload} from 'react-icons/io5'
+import {client} from '../utils/api-client'
 
 function Upload() {
   const [images, setImages] = useState([])
+  const [uploading, setUploading] = useState(false)
   const maxNumber = 69
+  const onChange = (imageList, addUpdateIndex) => setImages(imageList)
 
-  const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
-    console.log(imageList, addUpdateIndex)
-    setImages(imageList)
+  const handleUpload = async () => {
+    setUploading(true)
+    const uploadedImageData = images.map(image => {
+      const formData = new FormData()
+      formData.append('upload_preset', 'vbgheiiv')
+      formData.append('tags', 'browser_upload')
+      formData.append('file', image.file)
+
+      const config = {
+        method: 'POST',
+        body: formData,
+      }
+      const url = 'https://api.cloudinary.com/v1_1/dui18wjxg/image/upload'
+      return fetch(url, config)
+        .then(res => res.json())
+        .then(({secure_url, asset_id, public_id, url}) => ({
+          secure_url,
+          asset_id,
+          public_id,
+          url,
+        }))
+    })
+
+    let resolveImageData = await Promise.all(uploadedImageData)
+
+    const resData = client('/api/imagedata', {data: resolveImageData}).then(
+      res => {
+        setImages([])
+        setUploading(false)
+        return res
+      },
+    )
+    console.log(resData)
   }
-
-  const handleUpload = () => {}
 
   return (
     <div className="my-5">

@@ -19,4 +19,11 @@ exports.uploadImage = async (req, res) => {
     });
   }
 };
-exports.getImageData = async (req, res) => {};
+exports.getImageData = async (req, res) => {
+  try {
+    const data = await ImageData.find({ user: req.user.sub });
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(500).json({ msg: 'Server Error' });
+  }
+};
