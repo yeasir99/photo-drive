@@ -28,7 +28,7 @@ function ModalAbst({open, setOpen, style}) {
       onRequestClose={closeModal}
       style={{...customStyles, ...style}}
     >
-      <div>
+      <div className="max-w-screen-xl">
         <div>
           <button
             onClick={closeModal}
@@ -37,7 +37,9 @@ function ModalAbst({open, setOpen, style}) {
             <ImCross className="text-red-500" />
           </button>
         </div>
-        <img src={open.image?.url} alt="gallery" className="w-full h-auto" />
+        <div className="max-w-full">
+          <img src={open.image?.url} alt="gallery" className="w-full h-auto" />
+        </div>
         <div>
           <button
             onClick={() => navigator.clipboard.writeText(open.image.url)}

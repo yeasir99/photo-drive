@@ -7,7 +7,6 @@ function Gallery({loading, data}) {
     image: '',
     isOpen: false,
   })
-  console.log(open)
 
   if (loading) {
     return (
@@ -22,7 +21,7 @@ function Gallery({loading, data}) {
       {data.map(item => (
         <div
           key={item._id}
-          className="cursor-pointer"
+          className="cursor-pointer bg-gray-400"
           onClick={() => {
             setOpen({image: item, isOpen: true})
           }}
